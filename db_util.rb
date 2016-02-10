@@ -3,13 +3,6 @@
 # description: This will ensure that a dbdump is carried out every 30 minutes.
 # processname: dbdump
 
-#############################################
-# This passage to keep 2 daemon instances
-# from running at the same time
-# only one is allowed to run
-##############################################
-
-
 class Restore
   @ns = nil
 
