@@ -1,53 +1,13 @@
-mysql:  
-  build: ./
-    expose:
-    - "3306"
-    - "8000"
-  # Extend another service, in the current file or another, optionally
-  # overriding configuration.
-  extends:
-    file: common.yml
-    service: webapp
-  # Link to containers started outside this docker-compose.yml or even
-  # outside of Compose, especially for containers that provide shared or
-  # common services. external_links follow semantics similar to links when
-  # specifying both the container name and the link alias (CONTAINER:ALIAS).
-  external_links:
-    - redis_1
-    - project_db_1:mysql
-
-  # A single value, analogous to its docker run counterpart.
-  hostname: db
-  # Tag or partial image ID. Can be local or remote - Compose will
-  # attempt to pull if it doesn't exist locally.
-  image: mysql/mysql-server
+mysql:
+    container_name: data-store
+    image: mysql/mysql-server
+    working_dir: "/var/www"
+    volumes:
+        - /var/lib/mysql:/var/lib/mysql    
+    volumes_from:
+        - jboss
     links:
-    - db
-    - db:database
-    - redis
-    ports:
-    - "3000"
-    - "8000:8000"
-    - "49100:22"
-    - "127.0.0.1:8001:8001"
-  # A single value, analogous to its docker run counterpart.
-  privileged: true
-  # A single value, analogous to its docker run counterpart.
-  restart: always
-  # A single value, analogous to its docker run counterpart.
-  stdin_open: true
-  # A single value, analogous to its docker run counterpart.
-  tty: true
-  # A single value, analogous to its docker run counterpart.
-  user: postgresql
-  # Mount paths as volumes, optionally specifying a path on the host machine
-  # (HOST:CONTAINER), or an access mode (HOST:CONTAINER:ro).
-  volumes:
-    - /var/lib/mysql:/var/lib/mysql
+        - mysql
+    expose:
+        - "3306"
 
-  # Mount all of the volumes from another service or container.
-  volumes_from:
-    - service_name
-    - container_name
-  # A single value, analogous to its docker run counterpart.
-  working_dir: /code
