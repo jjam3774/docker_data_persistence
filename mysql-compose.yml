@@ -1,7 +1,7 @@
-service_name:  
+mysql:  
   build: ./
     expose:
-    - "3000"
+    - "3306"
     - "8000"
   # Extend another service, in the current file or another, optionally
   # overriding configuration.

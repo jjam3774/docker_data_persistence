@@ -1,0 +1,25 @@
+jboss:
+    container_name: jboss-app
+    image: ubuntu:trusty
+    volumes:
+        - /war_file:/war_file
+    links:
+        - mysql
+    expose:        
+        - "8080"    
+
+mysql:
+    container_name: data-store
+    image: mysql/mysql-server
+    working_dir: "/var/www"
+    volumes:
+        - /var/lib/mysql:/var/lib/mysql    
+    volumes_from:
+        - jboss
+    links:
+        - mysql
+    expose:
+        - "3306"
+    
+
+
