@@ -9,23 +9,6 @@
 # only one is allowed to run
 ##############################################
 
-count = 0
-IO.popen('ps -ef | grep dbdump | grep -v grep').each{|i|
-  count = count.next
-  if count > 1
-    case ARGV.first
-      when 'status'
-        puts '---------'
-      when 'stop'
-        puts "+++++++++"
-      when 'start'
-        puts "Another dbdump daemon is running.. exiting.."
-        exit 0
-      when 'restore'
-        puts '---------'
-    end
-  end
-}
 
 class Restore
   @ns = nil
