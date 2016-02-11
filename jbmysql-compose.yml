@@ -13,11 +13,7 @@ mysql:
     image: mysql/mysql-server
     working_dir: "/var/www"
     volumes:
-        - /var/lib/mysql:/var/lib/mysql    
-    volumes_from:
-        - jboss
-    links:
-        - mysql
+        - /var/lib/mysql:/var/lib/mysql
     expose:
         - "3306"
     
