@@ -1,5 +1,5 @@
 jboss:
-    container_name: jboss-app
+    #container_name: jboss-app
     image: ubuntu:trusty
     volumes:
         - /war_file:/war_file
@@ -9,11 +9,13 @@ jboss:
         - "8080"    
 
 mysql:
-    container_name: data-store
+    #container_name: data-store
     image: mysql/mysql-server
+    environment:
+        - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     working_dir: "/var/www"
     volumes:
-        - /var/lib/mysql:/var/lib/mysql
+        - /dbdata:/var/lib/mysql
     expose:
         - "3306"
     
