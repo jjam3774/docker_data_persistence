@@ -1,23 +1,24 @@
 jboss:
-    #container_name: jboss-app
-    image: ubuntu:trusty
-    volumes:
-        - /war_file:/war_file
+    image: tutum/jboss
+    #volumes:
+    #    - /war_file:/war_file
     links:
         - mysql
+    ports:        
+        - "8080:8080"    
+        - "9990:9990"    
     expose:        
-        - "8080"    
+        - "8080:8080"    
+        - "9990:9990"    
 
 mysql:
-    #container_name: data-store
-    image: mysql/mysql-server
-    environment:
-        - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-    working_dir: "/var/www"
+    image: klevo/percona
+    #environment:
+    #    - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     volumes:
-        - /dbdata:/var/lib/mysql
+        - /var/lib/mysql:/var/lib/mysql
     expose:
-        - "3306"
+        - "3306:3306"
     
 
 
