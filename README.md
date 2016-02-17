@@ -5,7 +5,7 @@ A demonstration of how you can use Docker-Compose to deploy a data-persistent co
 **volumes**
 Mount paths as volumes, optionally specifying a path on the host machine (HOST:CONTAINER), or an access mode
 
-    HOST:CONTAINER:ro
+    HOST:CONTAINER
 
     volumes:
      - /var/lib/mysql
