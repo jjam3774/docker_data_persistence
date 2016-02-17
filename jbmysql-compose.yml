@@ -2,6 +2,10 @@ jbossApp:
     image: tutum/jboss
     #volumes:
     #    - /war_file:/war_file
+    volumes:
+        - /war:/jboss-as-7.1.1.Final/standalone/deployments
+        #- /config_files:/jboss-as-7.1.1.Final
+    net: bridge
     links:
         - db
     ports:        
